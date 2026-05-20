@@ -12,4 +12,4 @@ export default async function Page({
 // Create a path
 // /person
 // /person/blogs
-// /person/blogs/:slug/edit
+// /person->blogs->[slug]->edit
