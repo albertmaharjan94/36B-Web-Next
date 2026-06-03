@@ -17,6 +17,7 @@ export const registerSchema = z.object({
     (data) => data.password === data.confirmPassword, 
     {
         message: "Passwords do not match",
+        path: ["confirmPassword"] // add this to show error on confirmPassword field
     }
 );
 export type RegisterFormData = z.infer<typeof registerSchema>;
