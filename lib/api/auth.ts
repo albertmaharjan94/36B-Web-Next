@@ -12,3 +12,14 @@ export const register = async (data: any) => {
         );
     }
 }
+export const login = async (data: any)=>{
+    try{
+        const response = await axiosInstance.post(API.AUTH.LOGIN, data);
+        return response.data;
+        // response.data -> response ko body
+    }catch (error: any) {
+        throw new Error(
+            error?.response?.data?.message || 'Login failed'
+        );
+    }
+}
