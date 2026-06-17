@@ -35,3 +35,23 @@ export const whoami = async ()=>{
         );
     }
 }
+
+export const profileUpdate = async ( data: any) => {
+    try{
+        const response = await axiosInstance.put(
+            API.AUTH.UPDATE, 
+            data,
+            {
+                headers: {
+                    "Content-Type": "multipart/form-data", // for multer
+                }
+            }
+        );
+        return response.data;
+        // response.data -> response ko body
+    }catch (error: any) {
+        throw new Error(
+            error?.response?.data?.message || 'Profile update failed'
+        );
+    }
+}

@@ -1,7 +1,9 @@
 "use server";  // from frontend server
 import { LoginFormData, RegisterFormData } from "@/app/(auth)/_components/schema";
-import { register, login, whoami } from "@/lib/api/auth";
+import { register, login, whoami, profileUpdate } from "@/lib/api/auth";
 import { setUserInfoCookie, setTokenCookie } from "../cookies";
+import { revalidatePath } from "next/cache";
+
 export async function registerUser(data: RegisterFormData) {
     try {
         const result = await register(data);
@@ -63,3 +65,23 @@ export async function getUserData() {
         return { success: false, message: error.message || 'Fetch user info failed' };
     }
 }
+
+
+export async function handleUpdateProfile(data: FormData) {
+    try {
+        const result = await profileUpdate(data);
+        if (result.success) {
+            revalidatePath("/dashboard/update-profile"); // update data
+            return {
+                success: true, data: result.data,
+                message: result.message || 'Profile update successful'
+            };
+        }
+        return {
+            success: false, message: result.message
+                || 'Profile update failed'
+        };
+    } catch (error: any) {
+        return { success: false, message: error.message || 'Profile update failed' };
+    }
+} 
