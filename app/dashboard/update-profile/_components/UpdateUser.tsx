@@ -74,11 +74,6 @@ export default function UpdateForm(
                 >
                     {isPending ? "Updating..." : "Update Profile"}
                 </button>
-                <div className="mt-4">
-                    <p className="mt-4 text-center">
-                        Already have an account? <a href="/login" className="text-blue-500">Login here</a>.
-                    </p>
-                </div>
             </form>
         </div>
     );
